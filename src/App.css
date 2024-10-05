@@ -1,0 +1,58 @@
+/* #react-root {
+  width: 100%;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+} */
+
+.page-root {
+  position: fixed;
+  background-color: red;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  height: 100%
+}
+
+.column {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  height: 100%;
+}
+
+.blue-column {
+  background-color: rgba(255, 255, 223, 0.935);
+  /* background: radial-gradient(ellipse at top, #9999ff, transparent),
+            radial-gradient(ellipse at bottom, #ffffff, transparent); */
+  flex-basis: 65%;
+}
+
+.green-column {
+  background-color: lightgreen;
+  flex-basis: 35%;
+}
+
+#xeokit-canvas {
+  height: 100%;
+  width: 100%;
+}
+
+.chat-component {
+  height: 100%;
+  width: 100%;
+}
+
+.cs-message__html-content p,ol,ul,li {
+  margin-block-end: 0px;
+  margin-block-start: 0px;
+}
+
+.cs-button.cs-button--attachment {
+  display:none;
+}
+
+.cs-message-input__content-editor-wrapper {
+  margin-left: 4px !important;
+}
