@@ -1,7 +1,14 @@
-# talk-to-me-bim
+## talk-to-me-bim
+
 Code for the talk2meBIM hackathon challenge!
 
-# configure it!
+## clone it!
+
+```
+git clone https://github.com/tmarti/talk-to-me-bim
+```
+
+## configure it!
 
 Edit `src/aiBackend.ts` and insert your openAI API key:
 
@@ -10,13 +17,13 @@ Edit `src/aiBackend.ts` and insert your openAI API key:
 const openAIApiKey = '{your-key-here}';
 ```
 
-# install it!
+## install it!
 
 ```
 npm install
 ```
 
-# run it!
+## run it!
 
 ```
 npm run dev
