@@ -1,7 +1,7 @@
 import { ChatOpenAI } from "@langchain/openai";
 import { AgentExecutor, createOpenAIFunctionsAgent } from 'langchain/agents';
 import { ModelLookupTool } from './ModelLookupTool';
-import { ObjectQuestionTool } from './ObjectQuestionTool';
+// import { ObjectQuestionTool } from './ObjectQuestionTool';
 import { NavigateToObjectTool } from './NavigateToObjectTool';
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { pull } from "langchain/hub";
