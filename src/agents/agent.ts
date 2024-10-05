@@ -43,11 +43,43 @@ export async function handleUserInput(messages: (HumanMessage | SystemMessage)[]
         tools,
     });
 
-    // Call the executor with the user input and chat history
-    const response = await agentExecutor.invoke({
+    // Create an async generator function to stream the response
+    async function* streamResponse() {
+        const queue: string[] = [];
+        let isDone = false;
+    
+        // Callback handlers to process streaming tokens
+        const callbacks = {
+            handleLLMNewToken: (token: string) => {
+                queue.push(token);
+            },
+            handleAgentEnd: () => {
+                isDone = true;
+            },
+        };
+    
+        // Start the agent executor without awaiting it
+        agentExecutor.invoke(
+        {
         input: messages.at(-1)?.content,
         chat_history: messages.slice(0, -1),
-    });
+        },
+        {
+            callbacks: [callbacks],
+        }
+        );
+    
+        // Yield tokens as they become available
+        while (!isDone || queue.length > 0) {
+            if (queue.length > 0) {
+                const tata = queue.shift();
+                yield tata;
+            } else {
+                // Wait briefly before checking the queue again
+                await new Promise((resolve) => setTimeout(resolve, 10));
+            }
+        }
+    }
 
-    return response.output as string;
+    return streamResponse();
 }

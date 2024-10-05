@@ -5,14 +5,12 @@ import { MessageList, MessageDto } from './MessageList';
 async function talkToAiBackend(messages: MessageDto[], onUpdate: (responsePart: string) => void) {
     const responseStream = await aiChat(messages)
 
-    onUpdate(responseStream);
-    // let response = '';
+    let response = '';
     
-    // for await (const chunk of responseStream) {
-    //     response += chunk.content;
-    //     // await new Promise(resolve => setTimeout(resolve, 400));
-    //     onUpdate(response);
-    // }
+    for await (const chunk of responseStream) {
+        response += chunk;
+        onUpdate(response);
+    }
 }
 
 export class AiMessageHandler {
