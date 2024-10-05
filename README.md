@@ -10,7 +10,7 @@ git clone https://github.com/tmarti/talk-to-me-bim
 
 ## configure it!
 
-Edit `src/aiBackend.ts` and insert your openAI API key:
+Edit `src/agents/agent.ts` and insert your openAI API key:
 
 ```ts
 // Insert here your openai API key

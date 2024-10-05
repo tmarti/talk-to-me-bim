@@ -7,7 +7,7 @@ import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { pull } from "langchain/hub";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 
-const openAIApiKey = '{your key here}';
+const openAIApiKey = '{your-key-here}';
 
 // Function to handle user input
 export async function handleUserInput(messages: (HumanMessage | SystemMessage)[]) {
