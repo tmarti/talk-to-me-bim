@@ -29,5 +29,5 @@ npm install
 npm run dev
 ```
 
-Now you can navigate to http://localhost:5173/
+Now you can navigate to [http://localhost:5173/](http://localhost:5173/)
 
