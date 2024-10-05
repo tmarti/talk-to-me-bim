@@ -46,7 +46,6 @@ export class BimModelInterface {
      * @returns A promise resolving to a string confirming the navigation action.
      */
     static async navigateToObject(objectId: string): Promise<string> {
-      console.log({objectId});
       // TODO: Implement your logic to navigate to the selected object in the BIM viewer.
       // Example:
       // await YourBIMViewerAPI.navigateToObject(selectedObjectId);

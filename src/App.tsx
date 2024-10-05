@@ -10,7 +10,6 @@ function App({messageList,objectSelection, busyIndicator}: {messageList: Message
   useEffect(() => {
     // Event handler function
     function handleLinkClick(event: MouseEvent) {
-      console.log (event);
       const target = event.target as HTMLLinkElement;
       if (target && target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
         event.preventDefault();

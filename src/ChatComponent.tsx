@@ -80,7 +80,6 @@ Suggestions: [isolate the object](#isolate-object), or [inspect the most relevan
 `,
                 who: "system"
             });
-            // console.log(`Selected object ID is now: ${objectId}`);
         };
         
         objectSelection.subscribe(handleSelectionChange);
