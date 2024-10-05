@@ -15,6 +15,7 @@ export async function handleUserInput(messages: (HumanMessage | SystemMessage)[]
         openAIApiKey,
         temperature: 0,
         streaming: true,
+        model: 'gpt-4o-mini'
     });
       
     // Define your tools
