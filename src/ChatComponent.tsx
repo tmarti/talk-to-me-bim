@@ -72,7 +72,12 @@ export const ChatComponent: React.FC<{ messageList: MyMessageList, objectSelecti
 
             messageList.addMessage({
                 id: (new Date()).getTime().toString(),
-                text: `ℹ️  You have selected the **${meta.type}** with id **${meta.id}**`,
+                text: `ℹ️  You have selected the **${meta.type}** with id **${meta.id}**
+
+You can ask any question you have about the object.
+
+Suggestions: [isolate the object](#isolate-object), or [inspect the most relevant object properties](#show-object-data)
+`,
                 who: "system"
             });
             // console.log(`Selected object ID is now: ${objectId}`);
@@ -113,7 +118,7 @@ export const ChatComponent: React.FC<{ messageList: MyMessageList, objectSelecti
                     <MessageList
                         typingIndicator={thinking?<TypingIndicator content="Thinking..." />:null}
                     >
-                        {messages.map(msg => (
+                        {messages.filter(m => !m.hidden).map(msg => (
                             <Message key={msg.id} model={{
                                 message: markdownToHtml(msg.text),
                                 direction: msg.who == 'user' ? 'outgoing' : 'incoming',

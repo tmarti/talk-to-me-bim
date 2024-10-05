@@ -2,6 +2,7 @@ export type MessageDto = {
     id: string;
     text: string;
     who: 'system' | 'user';
+    hidden?: boolean;
 };
 
 export class MessageList {
