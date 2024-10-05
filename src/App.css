@@ -56,3 +56,18 @@
 .cs-message-input__content-editor-wrapper {
   margin-left: 4px !important;
 }
+
+table {
+  border-collapse: collapse;
+  background: #eeeeee;
+}
+
+table, th, td {
+  border: 1px solid;
+  padding: 0px;
+  margin: 0px;
+}
+
+th,td {
+  padding: 2px;
+}

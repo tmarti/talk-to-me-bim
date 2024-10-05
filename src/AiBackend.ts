@@ -1,6 +1,7 @@
-import { ChatOpenAI, OpenAI } from "@langchain/openai";
+import { ChatOpenAI } from "@langchain/openai";
 import { MessageDto } from "./MessageList";
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
+import { handleUserInput } from "./agents/agent";
 
 // Insert here your openai API key
 const openAIApiKey = '{your-key-here}';
@@ -20,8 +21,9 @@ function mapMessagesToLangchain(messages: MessageDto[]) {
   });
 }
 
-export async function aiChat(messages: MessageDto[]) {
+export async function aiChat(messages: MessageDto[]) {  
   const langchainMessages = mapMessagesToLangchain(messages);
 
-  return openai.stream(langchainMessages);
+  // return openai.stream(langchainMessages);
+  return handleUserInput(langchainMessages);
 }
