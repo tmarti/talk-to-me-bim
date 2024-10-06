@@ -1,13 +1,13 @@
 import { ChatOpenAI } from "@langchain/openai";
 import { AgentExecutor, createOpenAIFunctionsAgent } from 'langchain/agents';
 import { ModelLookupTool } from './ModelLookupTool';
-// import { ObjectQuestionTool } from './ObjectQuestionTool';
+import { AggegatedDataQuestionTool } from './AggegatedDataQuestionTool';
 import { NavigateToObjectTool } from './NavigateToObjectTool';
 import { HumanMessage, SystemMessage } from "@langchain/core/messages";
 import { pull } from "langchain/hub";
 import { ChatPromptTemplate } from "@langchain/core/prompts";
 
-const openAIApiKey = '{your-key-here}';
+export const openAIApiKey = '{your-key-here}';
 
 // Function to handle user input
 export async function handleUserInput(messages: (HumanMessage | SystemMessage)[]) {
@@ -21,7 +21,7 @@ export async function handleUserInput(messages: (HumanMessage | SystemMessage)[]
     // Define your tools
     const tools = [
         new ModelLookupTool(),
-        // new ObjectQuestionTool(),
+        new AggegatedDataQuestionTool(),
         new NavigateToObjectTool(),
     ];
 
@@ -30,7 +30,7 @@ export async function handleUserInput(messages: (HumanMessage | SystemMessage)[]
     // https://smith.langchain.com/hub/hwchase17/openai-functions-agent
     const prompt = await pull<ChatPromptTemplate>(
         "hwchase17/openai-functions-agent"
-    );      
+    );
 
     const agent = await createOpenAIFunctionsAgent({
         llm,
@@ -62,8 +62,8 @@ export async function handleUserInput(messages: (HumanMessage | SystemMessage)[]
         // Start the agent executor without awaiting it
         agentExecutor.invoke(
         {
-        input: messages.at(-1)?.content,
-        chat_history: messages.slice(0, -1),
+            input: messages.at(-1)?.content,
+            chat_history: messages.slice(0, -1),
         },
         {
             callbacks: [callbacks],

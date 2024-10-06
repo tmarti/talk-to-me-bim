@@ -9,7 +9,29 @@ import { setXeokit } from './XeokitSingleton.ts'
 import { AiMessageHandler } from './AiMessageHandler'
 import { BusyIndicator } from './BusyIndicator.ts'
 
+import initSqlJs from 'sql.js';
+import { setSqlite } from './SqliteSingleton.ts'
+
+const initDb = async (dbUrl: string) => {
+  // Initialize sql.js
+  const SQL = await initSqlJs({
+    locateFile: () => `public/sql-wasm.wasm`,
+  });
+
+  // Load your existing database file
+  const dbFileArrayBuffer = await fetch(dbUrl).then(res => res.arrayBuffer());
+
+  // Create a database instance
+  const db = new SQL.Database(new Uint8Array(dbFileArrayBuffer));
+
+  return db;
+};
+
 (async () => {
+  const db = await initDb('public/Duplex.sqlite');
+
+  setSqlite(db);
+
   const canvasElement = document.getElementById('xeokit-canvas') as HTMLCanvasElement;
 
   const viewer = new Viewer({

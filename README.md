@@ -14,13 +14,13 @@ Edit `src/agents/agent.ts` and insert your openAI API key:
 
 ```ts
 // Insert here your openai API key
-const openAIApiKey = '{your-key-here}';
+export const openAIApiKey = '{your-key-here}';
 ```
 
 ## install it!
 
 ```
-npm install
+npm ci
 ```
 
 ## run it!

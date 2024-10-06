@@ -2,6 +2,10 @@
 
 import { VBOSceneModel } from "@xeokit/xeokit-sdk";
 import { getXeokit } from "./XeokitSingleton";
+import { ChatOpenAI } from "@langchain/openai";
+import { openAIApiKey } from './agents/agent';
+import { naturalLanguageToSqlitePrompt } from "./naturalLanguageToSqlitePrompt";
+import { getSqlite } from "./SqliteSingleton";
 
 export class BimModelInterface {
     /**
@@ -20,24 +24,39 @@ export class BimModelInterface {
 
       xeokit.metaScene.metaObjects[objectId].propertySets.forEach(pset => {
         pset.properties.forEach(p => {
-          result += `${pset.name}.${p.name}=${p.value}`;
+          result += `${pset.name}.${p.name}=${p.value}\n`;
         });
       });
 
       return result;
     }
   
-    /**
-     * Answers questions related to the last selected object in the BIM model.
-     * @param question - The question to answer.
-     * @returns A promise resolving to a string containing the answer.
-     */
-    static async objectQuestion(objectId: string, question: string): Promise<string> {
-      console.log({question, objectId});
-      // TODO: Implement your logic to answer questions about the selected object.
-      // This may involve NLP processing and querying object properties.
-      const xeokit = getXeokit();
-      throw new Error('objectQuestion method not implemented.');
+    static async aggregatedDataQuestion(question: string): Promise<string> {
+
+      const db = getSqlite();
+
+      const llm = new ChatOpenAI({
+        openAIApiKey,
+        temperature: 0,
+        streaming: true,
+        model: 'gpt-4o-mini'
+      });
+
+      const result = await llm.invoke(
+        naturalLanguageToSqlitePrompt(question)
+      );
+
+      let sql = result.content.toString();
+
+      sql = sql.substring(7, sql.length - 4 ) + ';';
+
+      // Execute a read-only query
+      const sqlResult = db.exec(sql);
+  
+      // Process the result
+      const plainTextResult = sqlResult[0].columns.join('|') + '\n' + sqlResult[0].values.map(v => v.join('|')).join('\n');
+  
+      return plainTextResult;
     }
   
     /**
@@ -54,27 +73,6 @@ export class BimModelInterface {
       xeokit!.scene.objects[objectId].visible = true;
       await new Promise<void>(resolve => xeokit!.cameraFlight.flyTo(xeokit!.scene.objects[objectId], resolve));
       return "Done!";
-    }
-  
-    /**
-     * Sets the currently selected object in the BIM model.
-     * @param objectId - The ID of the object to select.
-     */
-    static selectObject(objectId: string): void {
-      // TODO: Implement your logic to set the selected object.
-      // Example:
-      // this.selectedObjectId = objectId;
-      const xeokit = getXeokit();
-      throw new Error('selectObject method not implemented.');
-    }
-  
-    /**
-     * Clears the current object selection.
-     */
-    static clearSelection(): void {
-      // TODO: Implement your logic to clear the selected object.
-      const xeokit = getXeokit();
-      throw new Error('clearSelection method not implemented.');
     }
   }
   
