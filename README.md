@@ -8,7 +8,7 @@ https://github.com/user-attachments/assets/8c493885-5547-4fc9-a96e-7cc1588dc363
 
 ## 🎥 connecting the LLM to the model database
 
-https://github.com/user-attachments/assets/33418e31-9dfe-48a0-a0ca-649e58eeef0e
+https://github.com/user-attachments/assets/92413186-de27-4f4c-92de-2671aa66f923
 
 ## clone it!
 
