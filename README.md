@@ -2,6 +2,14 @@
 
 Code for the talk2meBIM hackathon challenge!
 
+## 🎥 connecting the LLM to the viewer and the model data
+
+https://github.com/user-attachments/assets/8c493885-5547-4fc9-a96e-7cc1588dc363
+
+## 🎥 connecting the LLM to the model database
+
+https://github.com/user-attachments/assets/33418e31-9dfe-48a0-a0ca-649e58eeef0e
+
 ## clone it!
 
 ```
